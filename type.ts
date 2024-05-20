@@ -7,11 +7,13 @@ export interface MailConfigTypes {
   [key: string]: MailConfigContentTypes;
 }
 
-export type UserMailConfigTypes = {
+export type MailConfiguration = {
   username: string;
   password: string;
+  name: string;
   host: string;
   port: number;
+  secure: boolean;
 };
 
 export type MailOptions = {

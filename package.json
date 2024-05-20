@@ -1,7 +1,7 @@
 {
   "name": "html-mail-sender",
-  "version": "1.0.3",
-  "description": "mail integration",
+  "version": "1.0.4",
+  "description": "HtmlMailSender is a TypeScript class for sending HTML emails using Nodemailer and Handlebars. This class dynamically generates the email content using a specified HTML template and sends it to specified recipients.",
   "main": "index.js",
   "type": "commonjs",
   "types": "./index.d.ts",

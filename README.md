@@ -12,7 +12,7 @@ npm install html-mail-sender
 
 ### Import the Package
 
-```
+```js
 import { sendMail } from "html-mail-sender";
 import { MailConfigTypes, UserMailConfigTypes } from "html-mail-sender/type";
 ```
@@ -21,8 +21,8 @@ import { MailConfigTypes, UserMailConfigTypes } from "html-mail-sender/type";
 
 Create an object with different email types, specifying the file extension of the HTML template and the email title.
 
-```
-const mailTypes: MailConfigTypes = {
+```js
+const MailTypes: MailConfigTypes = {
   ApplicationReceived: {
     fileExtension: "./template/mail/application-received.html",
     title: "Thank You For Visit Us.",
@@ -43,7 +43,7 @@ const mailTypes: MailConfigTypes = {
 
 Create an object with the dynamic content to be replaced in the HTML template.
 
-```
+```js
 const mailRequest: Record<string, string> = {
   code: "923161",
   location: "",
@@ -52,30 +52,24 @@ const mailRequest: Record<string, string> = {
   ....: ".....", // other mail dynamic content '{{aaa}} => aaa: "What do you want to write in the content?'
 };
 ```
-
-### Configure User Mail Settings
-
-Provide the email configuration for sending emails, including the username, password, port, and host.
-
-```
-const userDetailConfig: UserMailConfigTypes = {
-  username: "Your_E_Mail",
-  password: "Your_Password",
-  port: PORT, // example 587
-  host: "HOST_MAIL",
-};
-```
-
 ### Send Email
 
 Use the sendMail function to send emails.
 
-```
-sendMail(
-  "e_mail_to_be_sent",
-  mailTypes.EMailVerification,
-  mailRequest,
-  userDetailConfig
+```js
+const htmlMailSender = new HtmlMailSender({
+  password: "YOUR_EMAIL_PASSWORD",
+  username: "YOUR_EMAIL_USERNAME",
+  host: "smtp.gmail.com",
+  port: "YOUR_EMAIL_PORT",
+  name: "YOUR_EMAIL_NAME",
+  secure:"YOUR_EMAIL_SECURE",, // true for 465, false for other ports
+});
+
+htmlMailSender.sendMail(
+  "TO_EMAIL",
+  MailTypes.ApplicationReceived,
+  mailRequest
 );
 ```
 
@@ -85,7 +79,7 @@ Ensure your HTML templates have placeholders enclosed in double curly braces ({{
 
 ## Example HTML Template
 
-```
+```HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
