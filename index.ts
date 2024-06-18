@@ -19,14 +19,18 @@ export class HtmlMailSender {
     to: string,
     htmlFile: MailConfigContentTypes,
     mailRequest: Record<string, string>
-  ): Promise<void> {
+  ): Promise<boolean> {
+    let isSent = false;
     let html = "";
     try {
       html = fs.readFileSync(htmlFile.fileExtension, {
         encoding: "utf-8",
       });
     } catch (error) {
-      throw new Error("Error reading file");
+      isSent = false;
+    }
+    if (!isSent) {
+      return isSent;
     }
 
     var template = handlebars.compile(html);
@@ -60,10 +64,11 @@ export class HtmlMailSender {
       mailOptions,
       (error: Error | null, info: EmailDeliveryResponse) => {
         if (error) {
-          throw new Error("Error sending mail");
+          isSent = false;
         }
-        console.log("Mail sended:", info.messageId);
+        isSent = true;
       }
     );
+    return isSent;
   }
 }
