@@ -20,7 +20,7 @@ export class HtmlMailSender {
     htmlFile: MailConfigContentTypes,
     mailRequest: Record<string, string>
   ): Promise<boolean> {
-    let isSent = false;
+    let isSent = true;
     let html = "";
     try {
       html = fs.readFileSync(htmlFile.fileExtension, {
